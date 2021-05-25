@@ -1,21 +1,19 @@
 edition: 1.0.0
-access: "{{ access }}"
-
+name: appName #  项目名称
+access: default #  秘钥别名
 services:
-  website-starter:
-    component: devsapp/website
-    actions:
-      pre-deploy:
-        - run: npm install
-          path: ./
-        - run: npm run build
-          path: ./
+  start-function:
+    component: devsapp/functions
     props:
-      bucket: '{{ bucket | alibaba oss bucket }}'
-      src:
-        codeUri: ./
-        publishDir: ./build
-        index: index.html
+      functionPath: functions
       region: cn-hangzhou
-      hosts:
-        - host: auto
+      app:
+        name: functionApp # sss
+        vpcConfig: auto
+        runtime: nodejs12
+        memory: 1152
+        timeout: 60
+        concurrency: 1
+      http:
+        - route: /
+        - route: /like
