@@ -8,7 +8,11 @@ services:
       functionPath: functions
       region: cn-hangzhou
       app:
-        name: dk-tablestore-01 # sss
+        name: dk-tablestore-02 # sss
+        role: # TODO: 不生效
+          name: fcdeploydefaultrole-dk-tablestore-02
+          policies:
+            - AliyunOSSFullAccess
         vpcConfig: auto
         runtime: nodejs12
         memory: 1152

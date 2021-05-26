@@ -1,7 +1,11 @@
 Type: Application
-Name: dk-http
+Name: dk-tablestore
 Provider:
   - 阿里云
-Version: 0.0.1
+Version: 0.0.2
 Description: 阿里云DK框架HTTP触发器
 HomePage: https://github.com/devsapp/dk-example
+Tags:
+  - DK
+  - Serverless框架
+Category: Web框架
