@@ -16,4 +16,3 @@ services:
         concurrency: 1
       http:
         - route: /
-        - route: /like
