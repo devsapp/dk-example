@@ -1,4 +1,9 @@
 runtime: nodejs12
-# memory: 1152
-# timeout: 60
-# concurrency: 1
+http:
+  - authType: anonymous
+    methods:
+      - GET
+      - POST
+      - PUT
+      - DELETE
+      - HEAD
