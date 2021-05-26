@@ -8,21 +8,21 @@ services:
       functionPath: functions
       region: cn-hangzhou
       app:
-        name: dk-tablestore-02 # sss
-        role: # TODO: 不生效
-          name: fcdeploydefaultrole-dk-tablestore-02
+        name: dk-tablestore-demo
+        role:
+          name: fcdeploydefaultrole-dk-tablestore-demo
           policies:
-            - AliyunOSSFullAccess
-        vpcConfig: auto
+            - AliyunECSNetworkInterfaceManagementAccess
+            - AliyunOTSFullAccess
         runtime: nodejs12
         memory: 1152
         timeout: 60
         concurrency: 1
-        initializationTimeout: 60 # 选填
-        initializer: index.initializer # 选填
-        instanceConcurrency: 1 # 选填
-        instanceType: e1 # 选填
-        environmentVariables: # 选填
+        initializationTimeout: 60
+        initializer: index.initializer
+        instanceConcurrency: 1
+        instanceType: e1
+        environmentVariables:
           tablestore_endpoint: https://s-table-01.cn-hangzhou.ots.aliyuncs.com
           tablestore_instanceName: s-table-01
       http:
