@@ -5,3 +5,7 @@ Provider:
 Version: 0.0.1
 Description: 阿里云DK框架HTTP触发器
 HomePage: https://github.com/devsapp/dk-example
+Tags:
+  - DK
+  - Serverless框架
+Category: Web框架
