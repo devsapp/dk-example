@@ -16,7 +16,7 @@ const handler = http.onRequest({
     params.columnsToGet = ['name', 'age'];
     const data = await tableClient.getRow(params);
     return {
-      json: data,
+      json: data.row,
     };
   },
 });
