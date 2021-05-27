@@ -2,16 +2,26 @@ const { http, tablestoreInitialzerPlugin } = require('@serverless-devs/dk');
 
 const handler = http.onRequest({
   handler: async (request) => {
+    const { id } = request.req.queries;
+    if (!id) {
+      return {
+        body: '请检查id字段是否填写完整',
+      };
+    }
+
     const { tableClient, TableStore } = request.internal;
     const Long = TableStore.Long;
     var params = {
       tableName: 'dk_user',
       condition: new TableStore.Condition(TableStore.RowExistenceExpectation.IGNORE, null),
-      primaryKey: [{ gid: Long.fromNumber(20013) }, { uid: Long.fromNumber(20013) }],
+      primaryKey: [{ id: Long.fromNumber(id) }],
     };
-    const data = await tableClient.deleteRow(params);
+    await tableClient.deleteRow(params);
     return {
-      json: data,
+      json: {
+        id,
+        message: '数据删除成功',
+      },
     };
   },
 });

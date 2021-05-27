@@ -2,18 +2,22 @@ const { http, tablestoreInitialzerPlugin } = require('@serverless-devs/dk');
 
 const handler = http.onRequest({
   handler: async (request) => {
+    const { id, name, age } = request.req.body;
+    if (!id || !name || !age) {
+      return {
+        body: '请检查id, name或者age字段是否填写完整',
+      };
+    }
     const { tableClient, TableStore } = request.internal;
     const Long = TableStore.Long;
     var params = {
       tableName: 'dk_user',
       condition: new TableStore.Condition(TableStore.RowExistenceExpectation.IGNORE, null),
-      primaryKey: [{ gid: Long.fromNumber(9) }, { uid: Long.fromNumber(90) }],
+      primaryKey: [{ id: Long.fromNumber(id) }],
       updateOfAttributeColumns: [
         {
-          PUT: [{ col4: Long.fromNumber(4) }, { col5: '5' }, { col6: Long.fromNumber(7) }],
+          PUT: [{ name }, { age }],
         },
-        { DELETE: [{ col1: Long.fromNumber(1496826473186) }] },
-        { DELETE_ALL: ['col2'] },
       ],
       returnContent: { returnType: TableStore.ReturnType.Primarykey },
     };
