@@ -21,9 +21,12 @@ const handler = http.onRequest({
       ],
       returnContent: { returnType: TableStore.ReturnType.Primarykey },
     };
-    const data = await tableClient.updateRow(params);
+    await tableClient.updateRow(params);
     return {
-      json: data,
+      json: {
+        data: { id, name, age },
+        message: '数据更成功',
+      },
     };
   },
 });

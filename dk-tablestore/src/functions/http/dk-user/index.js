@@ -38,7 +38,7 @@ const handler = http.onRequest({
     };
     const data = await tableClient.createTable(params);
     return {
-      json: data,
+      body: 'dk_user表已创建成功',
     };
   },
 });
