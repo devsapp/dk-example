@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@serverless-devs/dk": "latest",
-    "@serverless-devs/tablestore-initialzer-plugin": "^0.0.3-alpha.1"
+    "@serverless-devs/dk": "latest"
   }
 }

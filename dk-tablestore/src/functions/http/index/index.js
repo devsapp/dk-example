@@ -1,5 +1,4 @@
-const { http } = require('@serverless-devs/dk');
-const tableStorePlugin = require('@serverless-devs/tablestore-initialzer-plugin');
+const { http, tablestoreInitialzerPlugin } = require('@serverless-devs/dk');
 
 const handler = http.onRequest({
   handler: async (request) => {
@@ -7,7 +6,7 @@ const handler = http.onRequest({
     const Long = TableStore.Long;
     //公用参数
     var params = {
-      tableName: 'user',
+      tableName: 'dk_user',
       primaryKey: [{ gid: Long.fromNumber(20013) }, { uid: Long.fromNumber(20013) }],
     };
     //设置读取最新版本，默认为1
@@ -21,7 +20,7 @@ const handler = http.onRequest({
   },
 });
 
-handler.use(tableStorePlugin());
+handler.use(tablestoreInitialzerPlugin());
 
 exports.initializer = handler.initializerHandler;
 

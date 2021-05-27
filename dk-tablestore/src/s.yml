@@ -6,7 +6,7 @@ services:
     component: devsapp/functions
     props:
       functionPath: functions
-      region: cn-hangzhou
+      region: cn-shenzhen
       app:
         name: dk-tablestore-demo
         role:
@@ -26,6 +26,7 @@ services:
           tablestore_endpoint: https://s-table-01.cn-hangzhou.ots.aliyuncs.com
           tablestore_instanceName: s-table-01
       http:
+        - route: /dk-user
         - route: /
         - route: /create
         - route: /update
