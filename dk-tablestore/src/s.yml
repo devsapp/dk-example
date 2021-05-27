@@ -1,6 +1,6 @@
 edition: 1.0.0
 name: appName #  项目名称
-access: default #  秘钥别名
+access: '{{ access }}'
 services:
   start-function:
     component: devsapp/functions
@@ -23,8 +23,8 @@ services:
         instanceConcurrency: 1
         instanceType: e1
         environmentVariables:
-          tablestore_endpoint: https://s-table-01.cn-hangzhou.ots.aliyuncs.com
-          tablestore_instanceName: s-table-01
+          tablestore_endpoint: '{{ tablestore_endpoint | 请输入tablestore实例的公网地址 }}'
+          tablestore_instanceName: '{{ tablestore_instanceName | 请输入tablestore实例名 }}'
       http:
         - route: /dk-user
         - route: /
