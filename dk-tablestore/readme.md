@@ -3,6 +3,8 @@
 - 下载命令行工具：`npm install -g @serverless-devs/s`
 - 初始化一个模版项目：`s init devsapp/dk-tablestore`
 - 下载完成后需要输入 tablestore 的实例名称和公网地址，请前往 [tablestore 控制台](https://otsnext.console.aliyun.com/)创建实例，在实例详情页面可以看到 `实例名称` 和 `公网地址`
+![image](https://img.alicdn.com/imgextra/i2/O1CN01VF6kv724mMdiMPC9q_!!6000000007433-2-tps-2184-1190.png)
+
 - 进入项目后执行 `s initfc` 来初始化路由，当然你也可以在 s.yml 文件里新增路由
 - 部署项目：`s deploy`
 
