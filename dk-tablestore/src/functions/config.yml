@@ -1,0 +1,37 @@
+region: cn-shenzhen
+app:
+  name: dk-tablestore-demo
+  role:
+    name: fcdeploydefaultrole-dk-tablestore-demo
+    policies:
+      - AliyunECSNetworkInterfaceManagementAccess
+      - AliyunOTSFullAccess
+  runtime: nodejs12
+  memory: 1152
+  timeout: 60
+  concurrency: 1
+  initializationTimeout: 60
+  initializer: index.initializer
+  instanceConcurrency: 1
+  instanceType: e1
+  environmentVariables:
+    tablestore_endpoint: https://s-table-01.cn-hangzhou.ots.aliyuncs.com
+    tablestore_instanceName: s-table-01
+customDomain: # 选填【不支持私有配置】，默认：
+  domainName: auto
+  protocol: HTTP
+  # protocol: HTTP,HTTPS
+  # certConfig:
+  #   certName: xxx
+  #   certificate: xxx
+  #   privateKey: xxx
+  # routeConfigs 的 path生成规则根据 s.yml 里面的 route 配置
+
+http: # 选填， 默认值
+  - authType: anonymous
+    methods:
+      - GET
+      - POST
+      - PUT
+      - DELETE
+      - HEAD

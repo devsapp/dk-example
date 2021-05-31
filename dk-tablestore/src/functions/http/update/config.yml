@@ -1,9 +1,0 @@
-runtime: nodejs12
-http:
-  - authType: anonymous
-    methods:
-      - GET
-      - POST
-      - PUT
-      - DELETE
-      - HEAD

@@ -1,33 +1,14 @@
 edition: 1.0.0
 name: appName #  项目名称
-access: '{{ access }}'
+access: default
 services:
   start-function:
-    component: devsapp/functions
+    component: devsapp/jamstack-api
     props:
-      functionPath: functions
-      region: cn-shenzhen
-      app:
-        name: dk-tablestore-demo
-        role:
-          name: fcdeploydefaultrole-dk-tablestore-demo
-          policies:
-            - AliyunECSNetworkInterfaceManagementAccess
-            - AliyunOTSFullAccess
-        runtime: nodejs12
-        memory: 1152
-        timeout: 60
-        concurrency: 1
-        initializationTimeout: 60
-        initializer: index.initializer
-        instanceConcurrency: 1
-        instanceType: e1
-        environmentVariables:
-          tablestore_endpoint: '{{ tablestore_endpoint | tablestore实例的公网地址 }}'
-          tablestore_instanceName: '{{ tablestore_instanceName | tablestore的实例名称 }}'
-      http:
-        - route: /dk-user
-        - route: /
-        - route: /create
-        - route: /update
-        - route: /remove
+      sourceCode: functions
+      route:
+        - /dk-user
+        - /
+        - /create
+        - /update
+        - /remove
