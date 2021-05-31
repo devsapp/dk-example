@@ -7,7 +7,10 @@ const handler = http.onRequest({
     const { tableNames } = await tableClient.listTable();
     if (tableNames.includes('dk_user')) {
       return {
-        body: `dk_user表已创建存在`,
+        json: {
+          exist: true,
+          message: 'dk_user表已存在',
+        },
       };
     }
     // dk_user 不存在则创建
@@ -36,9 +39,12 @@ const handler = http.onRequest({
         expirationTime: 24, //Stream的过期时间，单位是小时，最长为168，设置完以后不能修改
       },
     };
-    const data = await tableClient.createTable(params);
+    await tableClient.createTable(params);
     return {
-      body: 'dk_user表已创建成功',
+      json: {
+        exist: false,
+        message: 'dk_user表已创建成功',
+      },
     };
   },
 });

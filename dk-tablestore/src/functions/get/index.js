@@ -2,26 +2,21 @@ const { http, tablestoreInitialzerPlugin } = require('@serverless-devs/dk');
 
 const handler = http.onRequest({
   handler: async (request) => {
-    const { id, name, age } = request.req.body;
+    const { id = 0 } = request.req.queries;
     const { tableClient, TableStore } = request.internal;
     const Long = TableStore.Long;
+    //公用参数
     var params = {
       tableName: 'dk_user',
-      condition: new TableStore.Condition(TableStore.RowExistenceExpectation.IGNORE, null),
       primaryKey: [{ id: Long.fromNumber(id) }],
-      updateOfAttributeColumns: [
-        {
-          PUT: [{ name }, { age }],
-        },
-      ],
-      returnContent: { returnType: TableStore.ReturnType.Primarykey },
     };
-    await tableClient.updateRow(params);
+    //设置读取最新版本，默认为1
+    params.maxVersions = 1;
+    //设置读取指定的列
+    params.columnsToGet = ['name', 'age'];
+    const data = await tableClient.getRow(params);
     return {
-      json: {
-        data: { id, name, age },
-        message: '数据更成功',
-      },
+      json: data.row,
     };
   },
 });
