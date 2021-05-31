@@ -2,21 +2,28 @@ const { http, tablestoreInitialzerPlugin } = require('@serverless-devs/dk');
 
 const handler = http.onRequest({
   handler: async (request) => {
-    const { id = 0 } = request.req.queries;
     const { tableClient, TableStore } = request.internal;
-    const Long = TableStore.Long;
-    //公用参数
-    var params = {
+    const params = {
       tableName: 'dk_user',
-      primaryKey: [{ id: Long.fromNumber(id) }],
+      direction: TableStore.Direction.FORWARD,
+      maxVersions: 10,
+      inclusiveStartPrimaryKey: [{ id: TableStore.INF_MIN }],
+      exclusiveEndPrimaryKey: [{ id: TableStore.INF_MAX }],
+      limit: 2,
     };
-    //设置读取最新版本，默认为1
-    params.maxVersions = 1;
-    //设置读取指定的列
-    params.columnsToGet = ['name', 'age'];
-    const data = await tableClient.getRow(params);
+    let resultRows = [];
+    const getRange = async function () {
+      const data = await tableClient.getRange(params);
+      resultRows = resultRows.concat(data.rows);
+      //如果data.next_start_primary_key不为空，说明需要继续读取
+      if (data.nextStartPrimaryKey) {
+        params.inclusiveStartPrimaryKey = [{ id: data.nextStartPrimaryKey[0].value }];
+        await getRange();
+      }
+    };
+    await getRange();
     return {
-      json: data.row,
+      json: resultRows,
     };
   },
 });

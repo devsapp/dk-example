@@ -8,6 +8,8 @@
 - 进入项目后执行 `s initfc` 来初始化路由，当然你也可以在 s.yml 文件里新增路由
 - 部署函数：`s deploy`
 
+## [demo 地址演示](http://jamstack-api.system.dk-tablestore-demo.cn-shenzhen.1694024725952210.fc.devsapp.net/)
+
 ## 测试
 
 - 对于初次体验 dk-tablestore，你应该先去执行 `http-dk-user` 函数来创建一个 `dk_user` 的表, 进入 `http-dk-user` 函数详情 在 触发器 tab 下 可看到如下截图
@@ -16,20 +18,36 @@
   以 curl 访问
 
   ```shell
-  curl --location --request POST 'https://1694024725952210.cn-shenzhen.fc.aliyuncs.com/2016-08-15/proxy/dk-tablestore-demo-2/http-dk-user/'
+  curl --location --request POST 'https://1694024725952210.cn-shenzhen.fc.aliyuncs.com/2016-08-15/proxy/dk-tablestore-demo/dk-user/'
   ```
 
-  首次调用会返回 `dk_user表已创建成功`, 后续调用会返回 `dk_user表已存在`
+  首次调用会返回数据
+
+  ```js
+  {
+  "exist": false,
+  "message": "dk_user表已创建成功"
+  }
+  ```
+
+  后续调用会返回数据
+
+  ```js
+  {
+    "exist": true,
+    "message": "dk_user表已存在"
+  }
+  ```
 
 - 创建 （http-create 函数，以 post 方式请求）
 
   ```shell
-  curl --location --request POST 'https://1694024725952210.cn-shenzhen.fc.aliyuncs.com/2016-08-15/proxy/dk-tablestore-demo-2/http-create/' \
+  curl --location --request POST 'https://1694024725952210.cn-shenzhen.fc.aliyuncs.com/2016-08-15/proxy/dk-tablestore-demo/create/' \
   --header 'Content-Type: application/json' \
   --data-raw '{
-      "id": 1,
-      "name": "shl",
-      "age": 20
+    "id": 1,
+    "name": "xax",
+    "age": 21
   }'
   ```
 
@@ -37,12 +55,12 @@
 
   ```js
   {
-      "data": {
-          "id": 1,
-          "name": "shl",
-          "age": 20
-      },
-      "message": "数据创建成功"
+    "data": {
+        "id": 1,
+        "name": "xax",
+        "age": 21
+    },
+    "message": "数据创建成功"
   }
   ```
 
@@ -51,12 +69,12 @@
   以 curl 访问
 
   ```shell
-  curl --location --request POST 'https://1694024725952210.cn-shenzhen.fc.aliyuncs.com/2016-08-15/proxy/dk-tablestore-demo-2/http-update/' \
+  curl --location --request PUT 'https://1694024725952210.cn-shenzhen.fc.aliyuncs.com/2016-08-15/proxy/dk-tablestore-demo/update/' \
   --header 'Content-Type: application/json' \
   --data-raw '{
-      "id": 1,
-      "name": "xax",
-      "age": 21
+    "id": 1,
+    "name": "shl",
+    "age": 25
   }'
   ```
 
@@ -64,12 +82,12 @@
 
   ```js
   {
-      "data": {
-          "id": 1,
-          "name": "xax",
-          "age": 21
-      },
-      "message": "数据更成功"
+    "data": {
+        "id": 1,
+        "name": "shl",
+        "age": 25
+    },
+    "message": "数据更成功"
   }
   ```
 
@@ -78,38 +96,34 @@
   以 curl 访问
 
   ```shell
-  curl --location --request POST 'https://1694024725952210.cn-shenzhen.fc.aliyuncs.com/2016-08-15/proxy/dk-tablestore-demo-2/http-index/?id=1' \
-  --header 'Content-Type: application/json' \
-  --data-raw '{
-      "id": 1,
-      "name": "xax",
-      "age": 21
-  }'
+  curl --location --request GET 'https://1694024725952210.cn-shenzhen.fc.aliyuncs.com/2016-08-15/proxy/dk-tablestore-demo/get/'
   ```
 
   数据返回
 
   ```js
-  {
-      "primaryKey": [
-          {
-              "name": "id",
-              "value": 1
-          }
+  [
+    {
+      primaryKey: [
+        {
+          name: 'id',
+          value: 1622469300702,
+        },
       ],
-      "attributes": [
-          {
-              "columnName": "age",
-              "columnValue": 21,
-              "timestamp": 1622428063276
-          },
-          {
-              "columnName": "name",
-              "columnValue": "xax",
-              "timestamp": 1622428063276
-          }
-      ]
-  }
+      attributes: [
+        {
+          columnName: 'age',
+          columnValue: 20,
+          timestamp: 1622469569424,
+        },
+        {
+          columnName: 'name',
+          columnValue: 'shl',
+          timestamp: 1622469569424,
+        },
+      ],
+    },
+  ];
   ```
 
 - 删除 （http-remove, 以 delete 方式请求）
@@ -117,13 +131,7 @@
   以 curl 访问
 
   ```shell
-  curl --location --request POST 'https://1694024725952210.cn-shenzhen.fc.aliyuncs.com/2016-08-15/proxy/dk-tablestore-demo-2/http-remove/?id=1' \
-  --header 'Content-Type: application/json' \
-  --data-raw '{
-      "id": 1,
-      "name": "xax",
-      "age": 21
-  }'
+  curl --location --request DELETE 'https://1694024725952210.cn-shenzhen.fc.aliyuncs.com/2016-08-15/proxy/dk-tablestore-demo/remove/?id=1'
   ```
 
   数据返回
