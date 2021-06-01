@@ -14,6 +14,9 @@
         <!-- table -->
         <el-table :data="list" border style="width: 100%; margin-top: 16px;">
             <el-table-column prop="tableName" label="表名">
+                <template slot-scope="scope">
+                    <a :href="'/index/' + scope.row.tableName">{{scope.row.tableName}}</a>
+                </template>
             </el-table-column>
             <el-table-column label="操作">
                 <template slot-scope="scope">
