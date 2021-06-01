@@ -1,0 +1,17 @@
+function:
+  runtime: nodejs12
+  initializationTimeout: 60
+  initializer: index.initializer
+  instanceConcurrency: 1
+  instanceType: e1
+  environmentVariables:
+    tablestore_endpoint: https://s-table-01.cn-hangzhou.ots.aliyuncs.com
+    tablestore_instanceName: s-table-01
+http:
+  - authType: anonymous
+    methods:
+      - GET
+      - POST
+      - PUT
+      - DELETE
+      - HEAD
