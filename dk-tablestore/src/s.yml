@@ -4,12 +4,13 @@ access: default
 services:
   start-function:
     component: devsapp/jamstack-api
+    actions:
+      pre-deploy:
+        - run: npm install
+          path: ./functions
     props:
       sourceCode: functions
       route:
-        - /get
-        - /dk-user
-        - /
-        - /create
-        - /update
-        - /remove
+        - /index
+        - /list
+        - /info

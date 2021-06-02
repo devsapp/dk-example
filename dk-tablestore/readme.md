@@ -2,49 +2,82 @@
 
 - 下载命令行工具：`npm install -g @serverless-devs/s`
 - 初始化一个模版项目：`s init devsapp/dk-tablestore`
-- 下载完成后需要输入 tablestore 的实例名称和公网地址，请前往 [tablestore 控制台](https://otsnext.console.aliyun.com/)创建实例， 在实例详情页面可以看到 `实例名称` 和 `公网地址`
+- 下载完成后需要手动更改 tablestore 的实例名称和公网地址，请前往 [tablestore 控制台](https://otsnext.console.aliyun.com/)创建实例， 在实例详情页面可以看到 `实例名称` 和 `公网地址`
   ![image](https://img.alicdn.com/imgextra/i2/O1CN01VF6kv724mMdiMPC9q_!!6000000007433-2-tps-2184-1190.png)
 
 - 部署函数：`s deploy`
 
+## TODO:优化
+
+- 在控制台 `自定义域名` 页面，更改路由设置，将路径 /index => /index/\*
+  ![image](https://img.alicdn.com/imgextra/i4/O1CN01s0xSAU1LCUucIA9OB_!!6000000001263-2-tps-1370-712.png)
+
+- 然后访问 `${域名}/index/`就可以访问了
+  ![image](https://img.alicdn.com/imgextra/i2/O1CN014D9vzK1F81LXl0rMf_!!6000000000441-2-tps-1358-338.png)
+
 ## 测试
 
-- 对于初次体验 dk-tablestore，你应该先去执行 `http-dk-user` 函数来创建一个 `dk_user` 的表, 进入 `http-dk-user` 函数详情 在 触发器 tab 下 可看到如下截图
-  ![image](https://img.alicdn.com/imgextra/i2/O1CN013tapzS1bUOEc7P6v1_!!6000000003468-2-tps-1144-412.png)
-
-  以 curl 访问
+- 创建数据表
 
   ```shell
-  curl --location --request POST 'https://1694024725952210.cn-shenzhen.fc.aliyuncs.com/2016-08-15/proxy/dk-tablestore-demo/dk-user/'
-  ```
-
-  首次调用会返回数据
-
-  ```js
-  {
-  "exist": false,
-  "message": "dk_user表已创建成功"
-  }
-  ```
-
-  后续调用会返回数据
-
-  ```js
-  {
-    "exist": true,
-    "message": "dk_user表已存在"
-  }
-  ```
-
-- 创建 （http-create 函数，以 post 方式请求）
-
-  ```shell
-  curl --location --request POST 'https://1694024725952210.cn-shenzhen.fc.aliyuncs.com/2016-08-15/proxy/dk-tablestore-demo/create/' \
+  curl --location --request POST 'https://1694024725952210.cn-shenzhen.fc.aliyuncs.com/2016-08-15/proxy/dk-tablestore-demo/list/' \
   --header 'Content-Type: application/json' \
   --data-raw '{
-    "id": 1,
-    "name": "xax",
-    "age": 21
+    "tableName": "dk_user"
+  }'
+  ```
+
+  返回数据
+
+  ```js
+  {
+    "success": true,
+    "message": "dk_user表已创建成功"
+  }
+  ```
+
+- 获取所有表
+
+  ```shell
+  curl --location --request GET 'https://1694024725952210.cn-shenzhen.fc.aliyuncs.com/2016-08-15/proxy/dk-tablestore-demo/list/'
+  ```
+
+  返回数据
+
+  ```js
+  {
+    "tableNames": [
+        "dk_user"
+    ]
+  }
+  ```
+
+- 删除数据表
+
+  ```shell
+  curl --location --request DELETE 'https://1694024725952210.cn-shenzhen.fc.aliyuncs.com/2016-08-15/proxy/dk-tablestore-demo/list/?tableName=dk_user'
+  ```
+
+  数据返回
+
+  ```js
+  {
+    "success": true,
+    "message": "dk_user表已删除成功"
+  }
+  ```
+
+### 以 dk_user 表为例进行增删改查
+
+- 创建
+
+  ```shell
+  curl --location --request POST 'https://1694024725952210.cn-shenzhen.fc.aliyuncs.com/2016-08-15/proxy/dk-tablestore-demo/info/' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+    "tableName": "dk_user",
+    "name": "shl",
+    "age": 20
   }'
   ```
 
@@ -53,25 +86,23 @@
   ```js
   {
     "data": {
-        "id": 1,
-        "name": "xax",
-        "age": 21
+        "name": "shl",
+        "age": 20
     },
     "message": "数据创建成功"
   }
   ```
 
-- 更新 （http-update, 以 put 方式请求）
-
-  以 curl 访问
+- 更新
 
   ```shell
-  curl --location --request PUT 'https://1694024725952210.cn-shenzhen.fc.aliyuncs.com/2016-08-15/proxy/dk-tablestore-demo/update/' \
+  curl --location --request PUT 'https://1694024725952210.cn-shenzhen.fc.aliyuncs.com/2016-08-15/proxy/dk-tablestore-demo/info/' \
   --header 'Content-Type: application/json' \
   --data-raw '{
-    "id": 1,
-    "name": "shl",
-    "age": 25
+    "tableName": "dk_user",
+    "id": 1622604175120,
+    "age": 21,
+    "name": "dk"
   }'
   ```
 
@@ -80,20 +111,18 @@
   ```js
   {
     "data": {
-        "id": 1,
-        "name": "shl",
-        "age": 25
+        "id": 1622604175120,
+        "name": "dk",
+        "age": 21
     },
     "message": "数据更成功"
   }
   ```
 
-- 查寻 （http-index, 以 get 方式请求）
-
-  以 curl 访问
+- 查寻
 
   ```shell
-  curl --location --request GET 'https://1694024725952210.cn-shenzhen.fc.aliyuncs.com/2016-08-15/proxy/dk-tablestore-demo/get/'
+  curl --location --request GET 'https://1694024725952210.cn-shenzhen.fc.aliyuncs.com/2016-08-15/proxy/dk-tablestore-demo/info/?tableName=dk_user'
   ```
 
   数据返回
@@ -104,39 +133,37 @@
       primaryKey: [
         {
           name: 'id',
-          value: 1622469300702,
+          value: 1622604175120,
         },
       ],
       attributes: [
         {
           columnName: 'age',
-          columnValue: 20,
-          timestamp: 1622469569424,
+          columnValue: 21,
+          timestamp: 1622604557591,
         },
         {
           columnName: 'name',
-          columnValue: 'shl',
-          timestamp: 1622469569424,
+          columnValue: 'dk',
+          timestamp: 1622604557591,
         },
       ],
     },
   ];
   ```
 
-- 删除 （http-remove, 以 delete 方式请求）
-
-  以 curl 访问
+- 删除
 
   ```shell
-  curl --location --request DELETE 'https://1694024725952210.cn-shenzhen.fc.aliyuncs.com/2016-08-15/proxy/dk-tablestore-demo/remove/?id=1'
+  curl --location --request DELETE 'https://1694024725952210.cn-shenzhen.fc.aliyuncs.com/2016-08-15/proxy/dk-tablestore-demo/info/?id=1622604175120&tableName=dk_user'
   ```
 
   数据返回
 
   ```js
   {
-      "id": "1",
-      "message": "数据删除成功"
+    "id": "1622604175120",
+    "message": "数据删除成功"
   }
   ```
 
