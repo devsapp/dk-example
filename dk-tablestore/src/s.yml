@@ -1,6 +1,6 @@
 edition: 1.0.0
 name: appName #  项目名称
-access: default
+access: '{{access}}'
 services:
   start-function:
     component: devsapp/jamstack-api
