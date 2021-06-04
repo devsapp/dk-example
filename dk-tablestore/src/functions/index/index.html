@@ -28,7 +28,7 @@
         <!-- slide -->
         <el-drawer title="创建数据表" :visible.sync="drawer" :size="640">
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" style="width: 80%;">
-                <el-form-item label="姓名" prop="tableName">
+                <el-form-item label="表名" prop="tableName">
                     <el-input v-model="ruleForm.tableName"></el-input>
                 </el-form-item>
                 <el-form-item>
