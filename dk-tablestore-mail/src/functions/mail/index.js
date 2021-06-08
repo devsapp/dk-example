@@ -1,13 +1,12 @@
 const { dk, tablestoreInitialzerPlugin } = require('@serverless-devs/dk');
 const tableStoreEventParse = require('@serverless-devs/tablestore-event-parser');
-
 const nodemailer = require('nodemailer');
 
 const FROM = process.env.mail_from; // 发送邮箱
 const TO = process.env.mail_to; // 接收邮箱
-const PASS = process.env.mail_pass; // 发送邮箱的smtp授权码
-const [, PRODUCT] = process.env.mail_from.split('@'); // 发送平台
-const [SERVIVE] = PRODUCT.split('.');
+const PASS = process.env.mail_pass; // 发送邮箱的 smtp 授权码
+const [, PRODUCT] = process.env.mail_from ? process.env.mail_from.split('@') : ''; // 发送平台
+const [SERVIVE] = PRODUCT ? PRODUCT.split('.') : '';
 
 const TRANSPORT = {
   // host: 'smtp.ethereal.email',
@@ -23,8 +22,7 @@ const TRANSPORT = {
 // 发送邮件
 const sendMail = async (option) => {
   const transporter = nodemailer.createTransport(TRANSPORT);
-  const data = await transporter.sendMail(option);
-  console.log('----mail data ----', data);
+  await transporter.sendMail(option);
 };
 
 const handler = dk(async (request) => {

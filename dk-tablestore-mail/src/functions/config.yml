@@ -10,8 +10,6 @@ app:
   memory: 1152
   timeout: 60
   concurrency: 1
-  initializationTimeout: 60
-  initializer: index.initializer
   instanceConcurrency: 1
   instanceType: e1
 customDomain: # 选填【不支持私有配置】，默认：
