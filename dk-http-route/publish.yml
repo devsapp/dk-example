@@ -1,5 +1,5 @@
 Type: Application
-Name: dk-http
+Name: dk-http-route
 Provider:
   - 阿里云
 Version: 0.0.12
