@@ -1,6 +1,6 @@
 region: cn-shenzhen
 app:
-  name: jamstack-api-test
+  name: dk-http-route-demo
   # 可选服务配置 'logConfig', 'vpcConfig', 'nasConfig', 'role'
   # 可选函数配置
   # runtime: string # 默认：nodejs12,
