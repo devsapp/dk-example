@@ -1,19 +1,14 @@
 edition: 1.0.0
 name: appName #  项目名称
-access: default #  秘钥别名
+access: '{{access}}'
 services:
   start-function:
-    component: devsapp/functions
+    component: devsapp/jamstack-api
+    actions:
+      pre-deploy:
+        - run: npm install
+          path: ./functions
     props:
-      functionPath: functions
-      region: cn-hangzhou
-      app:
-        name: functionApp # sss
-        vpcConfig: auto
-        runtime: nodejs12
-        memory: 1152
-        timeout: 60
-        concurrency: 1
-      http:
-        - route: /
-        - route: /like
+      sourceCode: functions
+      route:
+        - / # /index

@@ -1,8 +1,3 @@
-# 阿里云函数计算：dk-http-route 框架
-
-handler 支持 object 类型，某一方法名不同method，支持单行模式，也支持对象型。
-
-```
 const { http } = require('@serverless-devs/dk')
 
 const handler = http.onRequest({
@@ -23,6 +18,3 @@ const handler = http.onRequest({
 })
 
 exports.handler = handler
-
-```
-

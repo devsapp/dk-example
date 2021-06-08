@@ -1,4 +1,5 @@
-runtime: nodejs12
+function:
+  runtime: nodejs12
 http:
   - authType: anonymous
     methods:
