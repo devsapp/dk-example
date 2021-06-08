@@ -42,7 +42,7 @@ jobs:
           ls
           python hub-publish.py
           cd ..
-       - name: Publish dk-tablestore-mail
+      - name: Publish dk-tablestore-mail
         env:
           publish_token: ${{ secrets.alibaba_registry_publish_token }}
         run: |
