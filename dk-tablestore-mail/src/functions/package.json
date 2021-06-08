@@ -1,0 +1,14 @@
+{
+  "name": "index",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@serverless-devs/dk": "latest",
+    "@serverless-devs/tablestore-event-parser": "latest",
+    "nodemailer": "^6.6.1"
+  }
+}
