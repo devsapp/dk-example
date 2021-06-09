@@ -4,10 +4,10 @@ const fs = require('fs-extra');
 // TODO: /index/*
 
 const handler = dk({
-  'get /index': (request) => {
+  'get /index': (ctx) => {
     return { html: fs.readFileSync('./index.html', 'utf8') };
   },
-  'get /index/:tableName': (request) => {
+  'get /index/:tableName': (ctx) => {
     return { html: fs.readFileSync('./info.html', 'utf8') };
   },
 });

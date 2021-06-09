@@ -3,9 +3,9 @@ const { http, tablestoreInitialzerPlugin } = require('@serverless-devs/dk');
 const handler = http.onRequest({
   handler: {
     '/': {
-      get: async (request) => {
-        const { tableName } = request.req.queries;
-        const { tableClient, TableStore } = request.internal;
+      get: async (ctx) => {
+        const { tableName } = ctx.req.queries;
+        const { tableClient, TableStore } = ctx.internal;
         const params = {
           tableName,
           direction: TableStore.Direction.FORWARD,
@@ -29,9 +29,9 @@ const handler = http.onRequest({
           json: resultRows,
         };
       },
-      post: async (request) => {
-        const { name, age, tableName } = request.req.body;
-        const { tableClient, TableStore } = request.internal;
+      post: async (ctx) => {
+        const { name, age, tableName } = ctx.req.body;
+        const { tableClient, TableStore } = ctx.internal;
         const Long = TableStore.Long;
         var currentTimeStamp = Date.now();
         const params = {
@@ -50,9 +50,9 @@ const handler = http.onRequest({
           },
         };
       },
-      put: async (request) => {
-        const { id, name, age, tableName } = request.req.body;
-        const { tableClient, TableStore } = request.internal;
+      put: async (ctx) => {
+        const { id, name, age, tableName } = ctx.req.body;
+        const { tableClient, TableStore } = ctx.internal;
         const Long = TableStore.Long;
         var params = {
           tableName,
@@ -73,9 +73,9 @@ const handler = http.onRequest({
           },
         };
       },
-      delete: async (request) => {
-        const { id, tableName } = request.req.queries;
-        const { tableClient, TableStore } = request.internal;
+      delete: async (ctx) => {
+        const { id, tableName } = ctx.req.queries;
+        const { tableClient, TableStore } = ctx.internal;
         const Long = TableStore.Long;
         var params = {
           tableName,

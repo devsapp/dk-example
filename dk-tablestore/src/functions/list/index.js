@@ -3,15 +3,15 @@ const { http, tablestoreInitialzerPlugin } = require('@serverless-devs/dk');
 const handler = http.onRequest({
   handler: {
     '/': {
-      get: async (request) => {
-        const { tableClient } = request.internal;
+      get: async (ctx) => {
+        const { tableClient } = ctx.internal;
         // 1.查询表
         const data = await tableClient.listTable();
         return { json: data };
       },
-      post: async (request) => {
-        const { tableName } = request.req.body;
-        const { tableClient } = request.internal;
+      post: async (ctx) => {
+        const { tableName } = ctx.req.body;
+        const { tableClient } = ctx.internal;
         const params = {
           tableMeta: {
             tableName,
@@ -45,9 +45,9 @@ const handler = http.onRequest({
           },
         };
       },
-      delete: async (request) => {
-        const { tableName } = request.req.queries;
-        const { tableClient } = request.internal;
+      delete: async (ctx) => {
+        const { tableName } = ctx.req.queries;
+        const { tableClient } = ctx.internal;
         const params = {
           tableName,
         };

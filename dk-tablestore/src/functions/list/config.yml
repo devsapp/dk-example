@@ -1,5 +1,7 @@
 function:
   runtime: nodejs12
+  initializationTimeout: 60
+  initializer: index.initializer
 http:
   - authType: anonymous
     methods:
