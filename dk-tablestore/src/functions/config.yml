@@ -1,11 +1,6 @@
 region: cn-shenzhen
 app:
   name: dk-tablestore-demo
-  role:
-    name: fcdeploydefaultrole-dk-tablestore-demo
-    policies:
-      - AliyunECSNetworkInterfaceManagementAccess
-      - AliyunOTSFullAccess
   runtime: nodejs12
 customDomain: # 选填【不支持私有配置】，默认：
   domainName: auto

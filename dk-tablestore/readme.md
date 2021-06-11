@@ -10,11 +10,6 @@
 
 - 部署函数：`s deploy`
 
-## TODO:优化
-
-- 在控制台 `自定义域名` 页面，更改路由设置，将路径 /index => /index/\*
-  ![image](https://img.alicdn.com/imgextra/i4/O1CN01s0xSAU1LCUucIA9OB_!!6000000001263-2-tps-1370-712.png)
-
 - 然后访问 `${域名}/index/`就可以访问了
   ![image](https://img.alicdn.com/imgextra/i2/O1CN014D9vzK1F81LXl0rMf_!!6000000000441-2-tps-1358-338.png)
 

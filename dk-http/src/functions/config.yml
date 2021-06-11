@@ -1,6 +1,6 @@
 region: cn-shenzhen
 app:
-  name: jamstack-api-test
+  name: dk-http
   # 可选服务配置 'logConfig', 'vpcConfig', 'nasConfig', 'role'
   # 可选函数配置
   # runtime: string # 默认：nodejs12,
@@ -23,9 +23,7 @@ customDomain: # 选填【不支持私有配置】，默认：
   #   certName: xxx
   #   certificate: xxx
   #   privateKey: xxx
-
   # routeConfigs 的 path生成规则根据 s.yml 里面的 route 配置
-
 
 http: # 选填， 默认值
   - authType: anonymous
