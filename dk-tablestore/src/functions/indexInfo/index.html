@@ -11,7 +11,7 @@
     <div id="app" style="padding: 0 24px;">
         <h3>dk-tablestore 增删改查 demo 演示</h3>
         <h4>
-            <a href="/index/">返回</a>
+            <a href="/">返回</a>
             <span>表管理（{{tableName}}）</span>
         </h4>
         <el-button type="primary" @click="handleOpenDialogByAdd" size="small">新建</el-button>
@@ -87,8 +87,11 @@
                 return this.isEdit ? '编辑' : '新建'
             },
             tableName() {
-                const [, , end] = window.location.pathname.split('/')
-                return end
+                const search = window.location.search.substr(1) || window.location.hash.split("?")[1];
+                const reg = new RegExp('(^|&)tableName=([^&]*)(&|$)');
+                const r = search.match(reg);
+                if (r != null) return decodeURI(r[2]);
+                return null;
             }
         },
         mounted() {

@@ -10,8 +10,8 @@
 
 - 部署函数：`s deploy`
 
-- 然后访问 `${域名}/index/`就可以访问了
-  ![image](https://img.alicdn.com/imgextra/i2/O1CN014D9vzK1F81LXl0rMf_!!6000000000441-2-tps-1358-338.png)
+- 部署成功后访问 `域名` 就可以了
+  ![image](https://img.alicdn.com/imgextra/i2/O1CN01Ra3NeY1TGB1b8IBFh_!!6000000002354-2-tps-1001-335.png)
 
 ## 测试
 
