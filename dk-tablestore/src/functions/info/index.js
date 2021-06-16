@@ -1,7 +1,7 @@
 const { dk, tablestoreInitialzerPlugin } = require('@serverless-devs/dk');
 
-const handler = dk({
-  '/': {
+const baseHandler = {
+  '/info': {
     get: async (ctx) => {
       const { tableName } = ctx.req.queries;
       const { tableClient, TableStore } = ctx.internal;
@@ -90,7 +90,9 @@ const handler = dk({
       };
     },
   },
-});
+};
+
+const handler = dk(baseHandler);
 
 handler.use(tablestoreInitialzerPlugin());
 

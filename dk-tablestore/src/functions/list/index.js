@@ -1,7 +1,7 @@
 const { dk, tablestoreInitialzerPlugin } = require('@serverless-devs/dk');
 
-const handler = dk({
-  '/': {
+const baseHandler = {
+  '/list': {
     get: async (ctx) => {
       const { tableClient } = ctx.internal;
       // 1.查询表
@@ -59,7 +59,9 @@ const handler = dk({
       };
     },
   },
-});
+};
+
+const handler = dk(baseHandler);
 
 handler.use(tablestoreInitialzerPlugin());
 
