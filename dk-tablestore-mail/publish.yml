@@ -2,7 +2,7 @@ Type: Application
 Name: dk-tablestore-mail
 Provider:
   - 阿里云
-Version: 0.0.16
+Version: 0.0.17
 Description: 阿里云DK框架HTTP触发器
 HomePage: https://github.com/devsapp/dk-example
 Tags:

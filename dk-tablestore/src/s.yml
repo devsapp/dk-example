@@ -10,10 +10,6 @@ services:
           path: ./functions
     props:
       sourceCode: functions
-      app:
-        environmentVariables:
-          tablestore_endpoint: '{{ tablestore_endpoint | tablestore实例的公网地址 }}'
-          tablestore_instanceName: '{{ tablestore_instanceName | tablestore的实例名称 }}'
       route:
         - /
         - /indexInfo
