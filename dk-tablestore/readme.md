@@ -13,7 +13,11 @@
 - 部署成功后访问 `域名` 就可以了
   ![image](https://img.alicdn.com/imgextra/i2/O1CN01Ra3NeY1TGB1b8IBFh_!!6000000002354-2-tps-1001-335.png)
 
-## 测试
+## 本地调试
+
+在 `根路径` 下执行 `node functions/sandbox.js` 即可访问 `http://localhost:3000`了
+
+## 接口测试
 
 - 创建数据表
 
