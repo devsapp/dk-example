@@ -15,7 +15,7 @@
 
 ## 本地调试
 
-在 `根路径` 下执行 `node functions/sandbox.js` 即可访问 `http://localhost:3000`了
+在 `sourceCode指定路径` 下执行 `npm run server` 即可访问 `http://localhost:3000` 了
 
 ## 接口测试
 
