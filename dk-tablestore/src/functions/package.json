@@ -7,12 +7,13 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "server": "sandbox"
+    "server": "nodemon -e html,js ./node_modules/.bin/sandbox"
   },
   "dependencies": {
     "@serverless-devs/dk": "latest"
   },
   "devDependencies": {
-    "@serverless-devs/sandbox": "latest"
+    "@serverless-devs/sandbox": "latest",
+    "nodemon": "^2.0.7"
   }
 }
