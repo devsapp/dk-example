@@ -9,6 +9,7 @@ services:
         - run: npm install
           path: ./functions
     props:
+      region: cn-shenzhen
       sourceCode: functions
       route:
         - /
