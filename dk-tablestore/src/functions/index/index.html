@@ -15,7 +15,7 @@
         <el-table :data="list" border style="width: 100%; margin-top: 16px;">
             <el-table-column prop="tableName" label="表名">
                 <template slot-scope="scope">
-                    <a :href="'/indexInfo?tableName=' + scope.row.tableName">{{scope.row.tableName}}</a>
+                    <a :href="getInfoPath(scope.row)">{{scope.row.tableName}}</a>
                 </template>
             </el-table-column>
             <el-table-column label="操作">
@@ -47,10 +47,10 @@
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 
 <script>
+    const isMock = window.location.hostname === 'localhost'
     function request(options) {
-        const isMock = window.location.hostname === 'localhost'
         return axios({
-            baseURL: isMock ? 'http://localhost:3000' : 'https://1694024725952210.cn-shenzhen.fc.aliyuncs.com/2016-08-15/proxy/dk-tablestore-demo/list',
+            baseURL: isMock ? `${window.location.origin}/api` : 'https://1694024725952210.cn-shenzhen.fc.aliyuncs.com/2016-08-15/proxy/dk-tablestore-demo/list',
             ...options
         })
     }
@@ -61,7 +61,6 @@
                 if (!value) {
                     return callback(new Error('表名不能为空'));
                 }
-                console.log(value, this.list);
                 const tableNames = this.list.map(item => item.tableName)
                 if (tableNames.includes(value)) {
                     return callback(new Error('表名已存在，请重新输入'));
@@ -95,6 +94,9 @@
                     tableName: item
                 })) : []
 
+            },
+            getInfoPath(row) {
+                return isMock ? `/api/indexInfo?tableName=${row.tableName}` : `/indexInfo?tableName=${row.tableName}`
             },
             handleOpenDialogByAdd() {
                 this.drawer = true

@@ -7,7 +7,7 @@ const baseHandler = {
     const data = await tableClient.listTable();
     return { json: data };
   },
-  'POST /info': async (ctx) => {
+  'POST /list': async (ctx) => {
     const { tableName } = ctx.req.body;
     const { tableClient } = ctx.internal;
     const params = {

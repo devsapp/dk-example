@@ -11,7 +11,7 @@
     <div id="app" style="padding: 0 24px;">
         <h3>dk-tablestore 增删改查 demo 演示</h3>
         <h4>
-            <a href="/">返回</a>
+            <a :href="backUrl">返回</a>
             <span>表管理（{{tableName}}）</span>
         </h4>
         <el-button type="primary" @click="handleOpenDialogByAdd" size="small">新建</el-button>
@@ -55,10 +55,10 @@
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 
 <script>
+    const isMock = window.location.hostname === 'localhost'
     function request(options) {
-        const isMock = window.location.hostname === 'localhost'
         return axios({
-            baseURL: isMock ? 'http://localhost:3000' : 'https://1694024725952210.cn-shenzhen.fc.aliyuncs.com/2016-08-15/proxy/dk-tablestore-demo/info',
+            baseURL: isMock ? `${window.location.origin}/api` : 'https://1694024725952210.cn-shenzhen.fc.aliyuncs.com/2016-08-15/proxy/dk-tablestore-demo/info',
             ...options
         })
     }
@@ -84,6 +84,9 @@
             }
         },
         computed: {
+            backUrl() {
+                return isMock ? '/api' : '/'
+            },
             drawerTitle() {
                 return this.isEdit ? '编辑' : '新建'
             },
