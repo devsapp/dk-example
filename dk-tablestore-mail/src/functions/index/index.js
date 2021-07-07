@@ -1,8 +1,8 @@
 const { dk } = require('@serverless-devs/dk');
 const fs = require('fs-extra');
 
-const handler = dk({
-  'get /index': (request) => {
+const baseHander = {
+  'GET /index': (request) => {
     const html = fs.readFileSync('./index.html', 'utf8');
 
     //  baseURL，tablestore_tableName
@@ -14,6 +14,8 @@ const handler = dk({
 
     return { html: newHtml };
   },
-});
+};
+
+const handler = dk(baseHander);
 
 exports.handler = handler;
