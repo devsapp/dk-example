@@ -1,6 +1,6 @@
-const { http, tablestoreInitialzerPlugin } = require('@serverless-devs/dk');
+const { dk, tablestoreInitialzerPlugin } = require('@serverless-devs/dk');
 
-const handler = http.onRequest({
+const handler = dk({
   handler: {
     '/UpdateRow': {
       get: async (request) => {
@@ -26,7 +26,7 @@ const handler = http.onRequest({
             message: '修改成功',
           },
         };
-      }
+      },
     },
     '/': {
       get: async (request) => {
@@ -41,7 +41,7 @@ const handler = http.onRequest({
           limit: 2,
         };
         let resultRows = [];
-        const getRange = async function() {
+        const getRange = async function () {
           const data = await tableClient.getRange(params);
           resultRows = resultRows.concat(data.rows);
           //如果data.next_start_primary_key不为空，说明需要继续读取
@@ -124,7 +124,5 @@ const handler = http.onRequest({
 });
 
 handler.use(tablestoreInitialzerPlugin());
-
-exports.initializer = handler.initializerHandler;
 
 exports.handler = handler;

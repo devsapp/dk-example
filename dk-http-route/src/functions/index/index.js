@@ -1,6 +1,6 @@
-const { http } = require('@serverless-devs/dk')
+const { dk } = require('@serverless-devs/dk');
 
-const handler = http.onRequest({
+const handler = dk({
   handler: {
     '/user': {
       GET: (request) => ({ body: JSON.stringify(request.req) }),
@@ -15,6 +15,6 @@ const handler = http.onRequest({
     'GET /getUser/:id': (request) => ({ body: JSON.stringify(request.req) }),
     'POST /getUser/:id': (request) => ({ body: JSON.stringify(request.req) }),
   },
-})
+});
 
-exports.handler = handler
+exports.handler = handler;

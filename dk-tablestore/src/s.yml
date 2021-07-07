@@ -9,7 +9,9 @@ services:
         - run: npm install
           path: ./functions
     props:
-      region: cn-shenzhen
+      region: cn-hangzhou
+      app:
+        name: dk-tablestore-demo #选填 默认 jamstack-api-demo
       sourceCode: functions
       route:
         - /

@@ -9,6 +9,9 @@ services:
         - run: npm install
           path: ./functions
     props:
+      region: cn-hangzhou
+      app:
+        name: dk-http-demo #选填 默认 jamstack-api-demo
       sourceCode: functions
       route:
         - / # /index

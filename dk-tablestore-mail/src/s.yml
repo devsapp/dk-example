@@ -9,15 +9,10 @@ services:
         - run: npm install
           path: ./functions
     props:
-      sourceCode: functions
+      region: cn-hangzhou
       app:
-        environmentVariables:
-          tablestore_endpoint: '{{ tablestore_endpoint | tablestore实例的公网地址 }}'
-          tablestore_instanceName: '{{ tablestore_instanceName | tablestore的实例名称 }}'
-          tablestore_tableName: '{{ tablestore_tableName | tablestore表名 }}'
-          mail_from: '{{ mail_from | 发送邮箱 }}'
-          mail_pass: '{{ mail_pass | 发送邮箱SMTP授权码 }}'
-          mail_to: '{{ mail_to | 接收邮箱 }}'
+        name: dk-tablestore-mail-demo #选填 默认 jamstack-api-demo
+      sourceCode: functions
       route:
         - /index
         - /info

@@ -16,8 +16,8 @@ const TRANSPORT = {
   auth: {
     user: FROM,
     pass: PASS, // 这里密码不是qq密码，是你设置的smtp授权码
-  }
-}
+  },
+};
 
 // 发送邮件
 const sendMail = async (option) => {
@@ -63,7 +63,5 @@ const handler = dk(async (request) => {
 });
 
 handler.use(tablestoreInitialzerPlugin()).use(tableStoreEventParse());
-
-exports.initializer = handler.initializerHandler;
 
 exports.handler = handler;
