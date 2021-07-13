@@ -2,3 +2,4 @@ node_modules
 .s
 dist
 package-lock.json
+yarn.lock

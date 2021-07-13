@@ -15,7 +15,7 @@
 
 ## 本地调试
 
-在 `sourceCode指定路径` 下执行 `npm run server` 即可访问 `http://localhost:3000` 了
+在 `sourceCode指定路径` 下执行 `npm run serve` 即可访问 `http://localhost:7001` 了
 
 ## 接口测试
 

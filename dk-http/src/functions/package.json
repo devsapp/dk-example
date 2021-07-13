@@ -6,7 +6,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "scripts": {
+    "serve": "sandbox"
+  },
   "dependencies": {
     "@serverless-devs/dk": "latest"
+  },
+  "devDependencies": {
+    "@serverless-devs/sandbox": "latest"
   }
 }

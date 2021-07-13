@@ -7,7 +7,7 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "server": "sandbox"
+    "serve": "sandbox"
   },
   "dependencies": {
     "@serverless-devs/dk": "latest"
