@@ -7,7 +7,7 @@ const baseHandler = (ctx) => {
   const html = fs.readFileSync(filePath, 'utf8');
 
   const { accountId, region, service } = ctx.context;
-  const baseURL = `https://${accountId}.${region}.fc.aliyuncs.com/2016-08-15/proxy/${service.name}/info`;
+  const baseURL = `https://${accountId}.${region}.fc.aliyuncs.com/2016-08-15/proxy/${service?.name}/info`;
   const newHtml = html.replace('base_url', baseURL);
   return { html: newHtml };
 };
