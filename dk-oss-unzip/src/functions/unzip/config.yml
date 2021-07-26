@@ -1,0 +1,8 @@
+oss:
+  events:
+    - oss:ObjectCreated:*
+  bucketName: shl-bucket
+  filter:
+    Key:
+      Prefix: source/
+      Suffix: .zip
