@@ -50,7 +50,7 @@
     const isMock = window.location.hostname === 'localhost'
     function request(options) {
         return axios({
-            baseURL: isMock ? `${window.location.origin}/api` : 'https://1694024725952210.cn-shenzhen.fc.aliyuncs.com/2016-08-15/proxy/dk-tablestore-demo/list',
+            baseURL: isMock ? `${window.location.origin}/api` : 'base_url',
             ...options
         })
     }
