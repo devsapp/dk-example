@@ -12,7 +12,11 @@
   "dependencies": {
     "@serverless-devs/dk": "latest",
     "ali-oss": "^6.16.0",
-    "decompress": "^4.2.1"
+    "decompress": "^4.2.1",
+    "dotenv": "^10.0.0",
+    "fs-extra": "^10.0.0",
+    "lodash": "^4.17.21",
+    "walk-sync": "^3.0.0"
   },
   "devDependencies": {
     "@serverless-devs/sandbox": "latest"

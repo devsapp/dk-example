@@ -4,14 +4,14 @@ access: default
 services:
   rest-api:
     component: devsapp/jamstack-api
-    # actions:
-    #   pre-deploy:
-    #     - run: npm i
-    #       path: functions
+    actions:
+      pre-deploy:
+        - run: npm i
+          path: functions
     props:
       region: cn-hangzhou
       app:
-        name: dk-oss-demo
+        name: dk-oss-unzip-demo
       sourceCode: functions
       route:
         - /unzip

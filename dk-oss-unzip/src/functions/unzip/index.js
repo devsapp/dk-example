@@ -1,26 +1,45 @@
 const { oss } = require('@serverless-devs/dk');
-const alioss = require('ali-oss');
+const aliOss = require('ali-oss');
 const path = require('path');
+const fs = require('fs-extra');
+const decompress = require('decompress');
+const walkSync = require('walk-sync');
+const dotenv = require('dotenv');
+const _ = require('lodash');
+
+const result = dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+const envConfig = result.parsed;
 
 const baseHandler = async (ctx) => {
-  const event = JSON.parse(ctx.event);
-  const ossEvent = event.events[0];
-  const { credentials } = ctx.context;
-  // Create oss client.
-  const client = new alioss({
-    region: 'oss-' + ossEvent.region,
-    bucket: ossEvent.oss.bucket.name,
-    accessKeyId: credentials.accessKeyId,
-    accessKeySecret: credentials.accessKeySecret,
-    stsToken: credentials.securityToken,
+  var event = JSON.parse(ctx.event);
+  var ossEvent = event.events[0];
+  var ossRegion = 'oss-' + ossEvent.region;
+  var client = new aliOss({
+    region: ossRegion,
+    accessKeyId: ctx.context.credentials.accessKeyId,
+    accessKeySecret: ctx.context.credentials.accessKeySecret,
+    stsToken: ctx.context.credentials.securityToken,
   });
-  await client.get(ossEvent.oss.object.key, path.resolve(__dirname, '../code.zip'));
+  client.useBucket(ossEvent.oss.bucket.name);
+  var tmpFile = `/tmp/${Date.now()}`;
+  const res = await client.get(ossEvent.oss.object.key);
+  fs.ensureDirSync(tmpFile);
+  await decompress(res.content, tmpFile, { strip: 1 });
+  const paths = walkSync(tmpFile);
+  for (const p of paths) {
+    const fillPath = path.resolve(tmpFile, p);
+    const stat = fs.statSync(fillPath);
+    if (stat.isFile()) {
+      const target = _.get(envConfig, 'filter_target', 'target');
+      await client.put(path.join(target, p), fillPath);
+    }
+  }
 };
 
 const handler = oss.onObjectCreated({
   handler: baseHandler,
   oss: {
-    bucketName: 'shl-bucket',
+    bucketName: _.get(envConfig, 'bucket_name'),
     filter: {
       prefix: 'source/',
       suffix: '.zip',
