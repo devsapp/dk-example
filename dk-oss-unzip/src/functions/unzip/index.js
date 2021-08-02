@@ -30,7 +30,7 @@ const baseHandler = async (ctx) => {
     const fillPath = path.resolve(tmpFile, p);
     const stat = fs.statSync(fillPath);
     if (stat.isFile()) {
-      const target = _.get(envConfig, 'filter_target', 'target');
+      const target = _.get(envConfig, 'filter_target', 'target/');
       await client.put(path.join(target, p), fillPath);
     }
   }
@@ -41,8 +41,8 @@ const handler = oss.onObjectCreated({
   oss: {
     bucketName: _.get(envConfig, 'bucket_name'),
     filter: {
-      prefix: 'source/',
-      suffix: '.zip',
+      prefix: _.get(envConfig, 'filter_prefix', 'source/'),
+      suffix: _.get(envConfig, 'filter_suffix', '.zip'),
     },
   },
 });

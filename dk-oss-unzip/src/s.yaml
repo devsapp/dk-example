@@ -1,6 +1,6 @@
 edition: 1.0.0
 name: appName
-access: default
+access: '{{access}}'
 services:
   rest-api:
     component: devsapp/jamstack-api
