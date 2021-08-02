@@ -11,17 +11,17 @@ const result = dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 const envConfig = result.parsed;
 
 const baseHandler = async (ctx) => {
-  var event = JSON.parse(ctx.event);
-  var ossEvent = event.events[0];
-  var ossRegion = 'oss-' + ossEvent.region;
-  var client = new aliOss({
+  const event = JSON.parse(ctx.event);
+  const ossEvent = event.events[0];
+  const ossRegion = 'oss-' + ossEvent.region;
+  const client = new aliOss({
     region: ossRegion,
     accessKeyId: ctx.context.credentials.accessKeyId,
     accessKeySecret: ctx.context.credentials.accessKeySecret,
     stsToken: ctx.context.credentials.securityToken,
   });
   client.useBucket(ossEvent.oss.bucket.name);
-  var tmpFile = `/tmp/${Date.now()}`;
+  const tmpFile = `/tmp/${Date.now()}`;
   const res = await client.get(ossEvent.oss.object.key);
   fs.ensureDirSync(tmpFile);
   await decompress(res.content, tmpFile, { strip: 1 });
