@@ -1,0 +1,17 @@
+edition: 1.0.0
+name: appName
+access: '{{access}}'
+services:
+  rest-api:
+    component: devsapp/jamstack-api
+    actions:
+      pre-deploy:
+        - run: npm i
+          path: functions
+    props:
+      region: cn-hangzhou
+      app:
+        name: dk-scheduler-demo
+      sourceCode: functions
+      route:
+        - /timer

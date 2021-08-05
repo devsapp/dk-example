@@ -1,7 +1,3 @@
-# 阿里云函数计算：Website-Base 框架
-
-通过该应用，您可以简单快速的创建一个 Example 框架到阿里云对象存储服务。
-
 - 下载命令行工具：`npm install -g @serverless-devs/s`
 - 初始化一个模版项目：`s init devsapp/dk-oss-unzip`
 - 进入项目后部署项目：`s deploy`
