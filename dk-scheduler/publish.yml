@@ -5,3 +5,7 @@ Provider:
 Version: 0.0.42
 Description: 阿里云DK框架scheduler触发器
 HomePage: https://github.com/devsapp/dk-example
+Tags:
+  - DK
+  - Serverless框架
+Category: Web框架
