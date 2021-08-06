@@ -1,7 +1,7 @@
 Type: Application
-Name: dk-http
+Name: dk-scheduler
 Provider:
   - 阿里云
-Version: 0.0.41
-Description: 阿里云DK框架HTTP触发器
+Version: 0.0.42
+Description: 阿里云DK框架scheduler触发器
 HomePage: https://github.com/devsapp/dk-example
