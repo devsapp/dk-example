@@ -4,7 +4,7 @@ const github_secret = process.env.github_secret;
 
 const github = githubHandler({ path: github_path, secret: github_secret });
 
-github.onEvent(data => console.log('监听event', data.event));
+github.onEvent(data => console.log('监听 event 事件', data.event));
 
 const baseHandler = (ctx) => {
   const data = github(ctx.req);
