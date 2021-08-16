@@ -1,12 +1,11 @@
 const { github } = require('@serverless-devs/dk');
-const github_path = process.env.github_path;
 const github_secret = process.env.github_secret;
 
 const handler = github({
   handler: (ctx) => {
     return { json: ctx.req.github }
   },
-  config: { path: github_path, secret: github_secret }
+  config: { path: '/', secret: github_secret }
 });
 
 exports.handler = handler;
