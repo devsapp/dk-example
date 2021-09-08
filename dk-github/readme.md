@@ -1,7 +1,4 @@
----
-sidebar_position: 3
-title: dk-github 监听 Webooks
----
+# 阿里云函数计算：DK-Github框架
 
 ## 介绍
 `dk` 集成了 [Github Webhooks](https://docs.github.com/en/developers/webhooks-and-events/webhooks/about-webhooks) 的 `events` 事件监听， 如 `push`、`issues`、`event` 等事件。通过 `dk` 部署的 `FC` 函数，在 `FC` 函数中添加事件监听，可以在代码提交到 `github` 仓库时，自动触发并执行相关操作，效果如 [Github Action](https://docs.github.com/cn/actions) 的自动化脚本的能力类似。

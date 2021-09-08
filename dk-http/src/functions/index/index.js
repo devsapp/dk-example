@@ -1,12 +1,13 @@
-const { dk } = require('@serverless-devs/dk');
+const { http } = require('@serverless-devs/dk');
 
-const baseHandler = (ctx) => {
-  // ctx 包含 ctx.req 可获取入参信息
-  return {
-    json: { title: 'hello serverless dk' },
-  };
-};
+http
+  .get("/http", (ctx) => {
+    ctx.body = 'Hello Http!';
+  })
+  .get("/", async (ctx, next) => {
+    ctx.body = "Hello World!";
+  })
 
-const handler = dk(baseHandler);
+http.app.use(http.routes());
 
-exports.handler = handler;
+exports.handler = http();
