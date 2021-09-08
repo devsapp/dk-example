@@ -3,9 +3,9 @@ const github_secret = process.env.github_secret;
 
 const handler = github({
   handler: (ctx) => {
-    return { json: ctx.req.github }
+    // 逻辑处理
   },
-  config: { path: '/', secret: github_secret }
+  config: { secret: github_secret }
 });
 
 exports.handler = handler;
