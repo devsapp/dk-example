@@ -15,7 +15,7 @@ services:
         name: serverless
         description: this is a test
         runtime: nodejs12
-        codeUri: ./functions
+        codeUri: ./code
         handler: index.handler
         memorySize: 128
         timeout: 10
