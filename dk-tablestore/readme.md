@@ -5,9 +5,6 @@
 - 下载完成后请输入 tablestore 的实例名称和公网地址，可前往 [tablestore 控制台](https://otsnext.console.aliyun.com/)创建实例， 在实例详情页面可以看到 `实例名称` 和 `公网地址`
   ![image](https://img.alicdn.com/imgextra/i2/O1CN01VF6kv724mMdiMPC9q_!!6000000007433-2-tps-2184-1190.png)
 
-- 请手动更改 `functions/index/index.html` 和 `functions/index/info.html` 的 `baseURL`
-  ![image](https://img.alicdn.com/imgextra/i1/O1CN01OfiqiY1GoReRnA0Sj_!!6000000000669-2-tps-895-113.png)
-
 - 部署函数：`s deploy`
 
 - 部署成功后访问 `域名` 就可以了

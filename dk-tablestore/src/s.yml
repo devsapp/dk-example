@@ -25,8 +25,8 @@ services:
         memorySize: 128
         timeout: 10
         environmentVariables:
-          tablestore_endpoint: '{{tablestore_endpoint}}'
-          tablestore_instanceName: '{{tablestore_instanceName}}'
+          tablestore_endpoint: '{{tablestore_endpoint | 请输入 tablestore 实例的公网地址}}'
+          tablestore_instanceName: '{{tablestore_instanceName | 请输入 tablestore 的实例名称}}'
       triggers:
         - name: httpTrigger
           type: http
