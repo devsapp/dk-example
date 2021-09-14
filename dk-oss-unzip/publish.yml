@@ -2,7 +2,7 @@ Type: Application
 Name: dk-oss-unzip
 Provider:
   - 阿里云
-Version: 0.0.57
+Version: 0.0.58
 Description: 阿里云DK框架OSS触发器
 HomePage: https://github.com/devsapp/dk-example
 Tags:
