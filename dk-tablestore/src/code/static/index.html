@@ -4,35 +4,52 @@
 <head>
     <meta charset="UTF-8">
     <!-- import CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet"
+          href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 </head>
 
 <body>
-    <div id="app" style="padding: 0 24px;">
+    <div id="app"
+         style="padding: 0 24px;">
         <h3>dk-tablestore 增删改查 demo 演示</h3>
-        <el-button type="primary" @click="handleOpenDialogByAdd" size="small">创建数据表</el-button>
+        <el-button type="primary"
+                   @click="handleOpenDialogByAdd"
+                   size="small">创建数据表</el-button>
         <!-- table -->
-        <el-table :data="list" border style="width: 100%; margin-top: 16px;">
-            <el-table-column prop="tableName" label="表名">
+        <el-table :data="list"
+                  border
+                  style="width: 100%; margin-top: 16px;">
+            <el-table-column prop="tableName"
+                             label="表名">
                 <template slot-scope="scope">
                     <a :href="getInfoPath(scope.row)">{{scope.row.tableName}}</a>
                 </template>
             </el-table-column>
             <el-table-column label="操作">
                 <template slot-scope="scope">
-                    <el-button size="mini" type="danger" @click="handleDelete(scope.row)">Delete
+                    <el-button size="mini"
+                               type="danger"
+                               @click="handleDelete(scope.row)">Delete
                     </el-button>
                 </template>
             </el-table-column>
         </el-table>
         <!-- slide -->
-        <el-drawer title="创建数据表" :visible.sync="drawer" :size="640">
-            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" style="width: 80%;">
-                <el-form-item label="表名" prop="tableName">
+        <el-drawer title="创建数据表"
+                   :visible.sync="drawer"
+                   :size="640">
+            <el-form :model="ruleForm"
+                     :rules="rules"
+                     ref="ruleForm"
+                     label-width="100px"
+                     style="width: 80%;">
+                <el-form-item label="表名"
+                              prop="tableName">
                     <el-input v-model="ruleForm.tableName"></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="handleConfirm('ruleForm')">确定</el-button>
+                    <el-button type="primary"
+                               @click="handleConfirm('ruleForm')">确定</el-button>
                     <el-button @click="drawer=false">取消</el-button>
                 </el-form-item>
             </el-form>
@@ -50,13 +67,16 @@
     const isMock = window.location.hostname === 'localhost'
     function request(options) {
         return axios({
-            baseURL: isMock ? `${window.location.origin}/api` : 'base_url',
+            baseURL: isMock ? `${window.location.origin}/api` : '',
+            headers: {
+                'Content-Type': 'application/json'
+            },
             ...options
         })
     }
     new Vue({
         el: '#app',
-        data: function () {
+        data: function() {
             const checkTableName = (rule, value, callback) => {
                 if (!value) {
                     return callback(new Error('表名不能为空'));
@@ -86,17 +106,19 @@
         },
         methods: {
             async  init() {
-                const { data } = await request({
-                    url: '/list/'
-                })
-
-                this.list = data.tableNames ? data.tableNames.map(item => ({
-                    tableName: item
-                })) : []
-
+                try {
+                    const { data } = await request({
+                        url: '/table',
+                    })
+                    this.list = data.tableNames ? data.tableNames.map(item => ({
+                        tableName: item
+                    })) : []
+                } catch (err) {
+                    console.log(222, err)
+                }
             },
             getInfoPath(row) {
-                return isMock ? `/api/indexInfo?tableName=${row.tableName}` : `/indexInfo?tableName=${row.tableName}`
+                return isMock ? `/api/info?tableName=${row.tableName}` : `/info?tableName=${row.tableName}`
             },
             handleOpenDialogByAdd() {
                 this.drawer = true
@@ -105,7 +127,7 @@
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         request({
-                            url: '/list/',
+                            url: '/table',
                             method: 'post',
                             data: this.ruleForm
                         }).then(() => {
@@ -128,11 +150,8 @@
                     type: 'warning'
                 }).then(() => {
                     request({
-                        url: '/list/',
+                        url: `/table/${row.tableName}`,
                         method: 'delete',
-                        params: {
-                            tableName: row.tableName
-                        }
                     }).then(() => {
                         this.init()
                         this.$message.success('数据删除成功');

@@ -1,20 +1,45 @@
-edition: 1.0.0
-name: appName #  项目名称
-access: '{{access}}'
+edition: 1.0.0          #  命令行YAML规范版本，遵循语义化版本（Semantic Versioning）规范
+name: dk-service       #  项目名称
+access: '{{access}}'  #  秘钥别名
+
 services:
-  start-function:
-    component: devsapp/jamstack-api
-    actions:
-      pre-deploy:
-        - run: npm install
-          path: ./functions
-    props:
+  fc-deploy-test: #  服务名称
+    component: devsapp/fc  # 组件名称
+    props: #  组件的属性值
       region: cn-hangzhou
-      app:
-        name: dk-tablestore-demo #选填 默认 jamstack-api-demo
-      sourceCode: functions
-      route:
-        - /
-        - /indexInfo
-        - /list
-        - /info
+      service:
+        name: dk-service
+        description: 'demo for dk-service component'
+        internetAccess: true
+        role:
+          name: tablestore
+          policies:
+            - AliyunOTSFullAccess
+      function:
+        name: tablestore
+        description: this is a test
+        runtime: nodejs12
+        codeUri: ./code
+        handler: index.handler
+        initializer: index.initializer
+        memorySize: 128
+        timeout: 10
+        environmentVariables:
+          tablestore_endpoint: '{{tablestore_endpoint}}'
+          tablestore_instanceName: '{{tablestore_instanceName}}'
+      triggers:
+        - name: httpTrigger
+          type: http
+          config:
+            authType: anonymous
+            methods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+      customDomains:
+        - domainName: auto
+          protocol: HTTP
+          routeConfigs:
+            - path: /*
+# 函数计算FC组件文档参考地址：https://github.com/devsapp/fc
