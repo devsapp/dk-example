@@ -10,7 +10,8 @@
     "serve": "sandbox"
   },
   "dependencies": {
-    "@serverless-devs/dk": "latest"
+    "@serverless-devs/dk": "latest",
+    "tablestore": "^5.0.7"
   },
   "devDependencies": {
     "@serverless-devs/sandbox": "latest"
