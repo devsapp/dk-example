@@ -2,7 +2,7 @@ Type: Application
 Name: dk-github
 Provider:
   - 阿里云
-Version: 0.0.61
+Version: 0.0.62
 Description: 阿里云DK框架Github触发器
 HomePage: https://github.com/devsapp/dk-example
 Tags:
