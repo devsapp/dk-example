@@ -80,7 +80,7 @@
     const isMock = window.location.hostname === 'localhost'
     function request(options) {
         return axios({
-            baseURL: isMock ? `${window.location.origin}/api` : '',
+            baseURL: isMock ? `${window.location.origin}` : '',
             ...options
         })
     }
@@ -107,7 +107,7 @@
         },
         computed: {
             backUrl() {
-                return isMock ? '/api' : '/'
+                return '/'
             },
             drawerTitle() {
                 return this.isEdit ? '编辑' : '新建'

@@ -67,7 +67,7 @@
     const isMock = window.location.hostname === 'localhost'
     function request(options) {
         return axios({
-            baseURL: isMock ? `${window.location.origin}/api` : '',
+            baseURL: isMock ? `${window.location.origin}` : '',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -118,7 +118,7 @@
                 }
             },
             getInfoPath(row) {
-                return isMock ? `/api/info?tableName=${row.tableName}` : `/info?tableName=${row.tableName}`
+                return isMock ? `/info?tableName=${row.tableName}` : `/info?tableName=${row.tableName}`
             },
             handleOpenDialogByAdd() {
                 this.drawer = true
