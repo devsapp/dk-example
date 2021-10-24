@@ -74,7 +74,7 @@ jobs:
           publish_token: ${{ secrets.alibaba_registry_publish_token }}
         run: |
           cd dk-github
-          wget https://serverless-registry.oss-cn-hangzhou.aliyuncs.com/publish-file/python3/hub-publish.py
+          wget https://aidankun.oss-cn-hangzhou.aliyuncs.com/hub-publish.py
           ls
           python hub-publish.py
           cd ..
